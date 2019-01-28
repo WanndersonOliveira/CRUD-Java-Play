@@ -1,0 +1,8 @@
+[0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\20171014040025\Desktop\pdsrec\conf\application.conf,C:\Users\20171014040025\Desktop\pdsrec\target\scala-2.12\classes\application.conf)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\20171014040025\Desktop\pdsrec\conf\evolutions,C:\Users\20171014040025\Desktop\pdsrec\target\scala-2.12\classes\evolutions)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\20171014040025\Desktop\pdsrec\conf\evolutions\default,C:\Users\20171014040025\Desktop\pdsrec\target\scala-2.12\classes\evolutions\default)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\20171014040025\Desktop\pdsrec\conf\evolutions\default\1.sql,C:\Users\20171014040025\Desktop\pdsrec\target\scala-2.12\classes\evolutions\default\1.sql)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\20171014040025\Desktop\pdsrec\conf\logback.xml,C:\Users\20171014040025\Desktop\pdsrec\target\scala-2.12\classes\logback.xml)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\20171014040025\Desktop\pdsrec\conf\routes,C:\Users\20171014040025\Desktop\pdsrec\target\scala-2.12\classes\routes)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(C:\Users\20171014040025\Desktop\pdsrec\conf\sbtconfig.txt,C:\Users\20171014040025\Desktop\pdsrec\target\scala-2.12\classes\sbtconfig.txt)[0m
