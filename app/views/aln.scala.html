@@ -1,0 +1,163 @@
+@(aluno: models.Aluno)(imagem: String)
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>@aluno.getNome()</title>
+	<script type="text/javascript" src="@routes.Assets.versioned("javascripts/highcharts.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.versioned("javascripts/exporting.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.versioned("javascripts/export-data.js")"></script>
+</head>
+<body>
+    <style type="text/css">
+        #supBar{
+            position: absolute;
+            top: 2px;
+            left: 2%;
+            width: 95%;
+            height: 100px;
+            background-color: green;
+            border-width: 1px;
+            border-style: none;
+            border-radius: 2%;
+        }
+
+        #img{
+            position: absolute;
+            top: 10px;
+            left: 3%;
+            border-width: 1px;
+            border-style: none;
+            border-radius: 50%;
+            width: 70px;
+        }
+
+        #nome, #sair, #moeda{
+            position: absolute;
+            top: 40px;
+            left: 30%;
+            font-weight: bold;
+            font-size: 1.5em;
+            text-decoration: none;
+            color: white;
+        }
+
+        #sair{
+            left: 85%;
+        }
+
+        #estatistica, #turmas{
+            position: absolute;
+            top: 150px;
+            left: 10%;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        #turmas{
+            left: 50%;
+        }
+
+        #msg, #container{
+            position: absolute;
+            top: 300px;
+            left: 30%;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+
+        #container{
+            top: 350px;
+        }
+
+        #moeda{
+            top: 20px;
+            left: 60%;
+        }
+
+        #title{
+            position: absolute;
+            top: 200px;
+            left: 10%;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    </style>
+
+    <div id="supBar">
+        <img src="../assets/images/@imagem" id="img">
+        <a href="#" id="nome">@aluno.getNome()</a>
+        <p id="moeda">Moeda: @aluno.getMoeda()</p>
+        <a href="/" id="sair">Sair</a><br>
+    </div>
+
+    <a href="/statistics" id="estatistica">Estatísticas</a>
+    <a href="/minhasturmasaln" id="turmas">Minhas Turmas</a>
+
+    <p id="title">Estatísticas</p>
+	<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+	<script>
+	Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Rendimento do Aluno'
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: [
+            'Meu Rendimento'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: ''
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.2f}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+    	name: 'Total de Questões Respondidas',
+    	data: [@aluno.getQuestoesRespondidas()]
+    },{
+    	name: 'Total de Questões Acertadas',
+    	data: [@aluno.getMoeda()]
+    },{
+        name: 'Média de Questões Acertadas',
+        data: [@aluno.getMedia()]
+
+    },{
+    	name: 'Quantidade de Questões Frequentemente Acertadas',
+    	data: [@aluno.getModa()]
+    },{
+    	name: 'Rendimento Total do Aluno',
+    	data: [@aluno.getRendimento()*100]
+    }]
+    });
+	</script>
+
+    <br>
+    @if(aluno.getTurmas().size() == 0){
+        <b id="msg">Você não tem turmas</b>
+    }
+</body>
+</html>

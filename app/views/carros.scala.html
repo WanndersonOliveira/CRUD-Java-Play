@@ -1,0 +1,29 @@
+@(user:Usuario)(carros:List[models.Carro])
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>@user.getNome()</title>
+</head>
+<body bgcolor="grey">
+	<h3>Car System</h3><br>
+	<a href="/prova"><b>Sair</b></a>
+	<br><br>
+	<b>Meus carrinhos listados</b><br><br>
+	<form method="get" action="/prova/buscar">
+		<input type="text" name="texto" placeholder="Buscar Carrinho">
+		<input type="submit" value="Buscar">
+	</form>
+	<br><br>
+	<ul>
+		@for(carro <- carros){
+			<li>@carro.getModelo() - @carro.getMarca - <a href="/prova/edite/@carro.getModelo()/@carro.getMarca()">Editar</a> - <a href="/prova/delete/@carro.getModelo()/@carro.getMarca()">Remover</a></li>
+		}
+	</ul>
+	<br>
+	<br>
+	<a href="#">Inserir elemento</a>
+	<br>
+
+</body>
+</html>

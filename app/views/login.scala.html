@@ -1,0 +1,100 @@
+@(palavra: String)
+<!DOCTYPE html>
+<html>
+<head>
+	<title>School System</title>
+</head>
+<body>
+	<style type="text/css">
+		body{
+			background-color: #8080ff;
+		}
+
+		#formulario{
+			position: absolute;
+			top: 50px;
+			left: 30%;
+			height: 500px;
+			width: 300px;
+			background-color: white;
+			border-style: none;
+			border-width: 1px;
+			border-radius: 25% 10% 25% 10%;
+		}
+
+		#titulo{
+			position: absolute;
+			top: 30px;
+			left: 20%;
+			font-size: 1.8em;
+			font-weight: bold;
+			font-family: cambria;
+		}
+
+		#email, #senha, #cbaluno, #cbprofessor, #txtProf, #txtAln, #log_btn{
+			position: absolute;
+			top: 150px;
+			left: 10%;
+		}
+
+		#senha{
+			top: 200px;
+		}
+
+		#cbaluno, #cbprofessor, #txtAln, #txtProf{
+			top: 300px;
+		}
+
+		#txtAln{
+			top: 287px;
+			left: 18%;
+		}
+
+		#cbprofessor{
+			left: 40%;
+		}
+
+		#txtProf{
+			top: 288px;
+			left: 47%;
+		}
+
+		#log_btn{
+			top: 400px;
+			background-color: blue;
+			border-style: none;
+			border-width: 1px;
+			border-radius: 5%;
+			height: 30px;
+			width: 50%;
+			color: white;
+		}
+
+		#img1{
+			position: absolute;
+			top: 20px;
+			left: 15px;
+			height: 600px;
+			width: 95%;
+			z-index: -1;
+		}
+
+	</style>
+		
+
+	<img src="../assets/images/principal.jpg" id="img1">
+	<div id="formulario">
+		<p id="titulo">School System</p>
+	<form method="post" action="/entrar">
+		<input type="email" name="email" id="email" placeholder="Email">
+		<input type="password" name="senha" id="senha" placeholder="Senha">
+		<input type="radio" name="usuario" id="cbaluno" value="aluno">
+		<input type="radio" name="usuario" id="cbprofessor" value="professor">
+		<input type="submit" value="Entrar" id="log_btn">
+	</form>
+
+	<p id="txtProf">Professor</p>
+	<p id="txtAln">Aluno</p>
+	</div>
+</body>
+</html>

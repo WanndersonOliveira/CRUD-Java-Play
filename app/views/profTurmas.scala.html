@@ -1,0 +1,95 @@
+@(professor: models.Professor)(imagem: String)
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>@professor.getNome()</title>
+</head>
+<body>
+    <style type="text/css">
+        #supBar{
+            position: absolute;
+            top: 2px;
+            left: 2%;
+            width: 95%;
+            height: 100px;
+            background-color: green;
+            border-width: 1px;
+            border-style: none;
+            border-radius: 2%;
+        }
+
+        #img{
+            position: absolute;
+            top: 10px;
+            left: 3%;
+            border-width: 1px;
+            border-style: none;
+            border-radius: 50%;
+            width: 70px;
+        }
+
+        #nome, #sair{
+            position: absolute;
+            top: 40px;
+            left: 30%;
+            font-weight: bold;
+            font-size: 1.5em;
+            text-decoration: none;
+            color: white;
+        }
+
+        #sair{
+            left: 85%;
+        }
+
+        #estatistica, #turmas, #lista, #msg, #title{
+            position: absolute;
+            top: 150px;
+            left: 10%;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        #turmas{
+            left: 50%;
+        }
+
+        #title{
+            top: 200px;
+            left: 10%;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        #lista, #msg{
+            top: 250px;
+            left: 30%;
+        }
+
+
+    </style>
+
+    <div id="supBar">
+        <img src="../assets/images/@imagem" id="img">
+        <a href="#" id="nome">@professor.getNome()</a>
+        <a href="/" id="sair">Sair</a><br>
+    </div>
+
+    
+    <a href="/statistics" id="estatistica">Estatísticas</a>
+    <a href="/minhasturmas" id="turmas">Minhas Turmas</a>
+
+    <p id="title">Minhas Turmas</p>
+    @if(professor.getTurmas().size() != 0){
+        <ul id="lista">
+            @for(turma <- professor.getTurmas()){
+                <li><a href="#">@turma.getNome()</a></li>
+            }
+        </ul>
+    } else {
+        <b id="msg">Olá @professor.getNome(), você não tem turmas cadastradas!</b>
+    }
+    
+</body>
+</html>

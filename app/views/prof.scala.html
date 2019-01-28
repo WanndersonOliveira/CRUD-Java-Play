@@ -1,0 +1,196 @@
+@(professor: models.Professor)(imagem: String)
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>@professor.getNome()</title>
+	<script type="text/javascript" src="@routes.Assets.versioned("javascripts/highcharts.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.versioned("javascripts/exporting.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.versioned("javascripts/export-data.js")"></script>
+</head>
+<body>
+	<style type="text/css">
+		#supBar{
+			position: absolute;
+			top: 2px;
+			left: 2%;
+			width: 95%;
+			height: 100px;
+			background-color: green;
+			border-width: 1px;
+			border-style: none;
+			border-radius: 2%;
+		}
+
+		#img{
+			position: absolute;
+			top: 10px;
+			left: 3%;
+			border-width: 1px;
+			border-style: none;
+			border-radius: 50%;
+			width: 70px;
+		}
+
+		#nome, #sair{
+			position: absolute;
+			top: 40px;
+			left: 30%;
+			font-weight: bold;
+			font-size: 1.5em;
+			text-decoration: none;
+			color: white;
+		}
+
+		#sair{
+			left: 85%;
+		}
+
+		#estatistica, #turmas{
+			position: absolute;
+			top: 150px;
+			left: 10%;
+			text-decoration: none;
+			font-size: 1.2em;
+		}
+
+		#turmas{
+			left: 50%;
+		}
+
+		#msg1, #msg2, #msg3Box, #container{
+			position: absolute;
+			top: 300px;
+			left: 30%;
+			text-decoration: none;
+			font-size: 1.1em;
+		}
+
+		#msg2{
+			top: 350px;
+		}
+
+		#msg3Box{
+			top: 380px;
+		}
+
+		#container{
+			top: 500px;
+		}
+	</style>
+
+	<div id="supBar">
+		<img src="../assets/images/@imagem" id="img">
+		<a href="#" id="nome">@professor.getNome()</a>
+		<a href="/" id="sair">Sair</a><br>
+	</div>
+
+	
+	<a href="/statistics" id="estatistica">Estatísticas</a>
+	<a href="/minhasturmas" id="turmas">Minhas Turmas</a>
+
+
+	@if(professor.getTurmas().size() != 0){
+		<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+	}
+
+	<br>
+
+	@if(professor.getTurmas().size() == 1){
+		<script type="text/javascript">
+			var cat = ['@professor.getTurmas().get(0).getNome()'];
+			var media = [@professor.getTurmas().get(0).getMedia()];
+			var moda = [@professor.getTurmas().get(0).getModa()];
+			var rend = [@professor.getTurmas().get(0).getRendimento()*100];
+		</script>
+	} else if(professor.getTurmas().size() == 2){
+		<script type="text/javascript">
+			var cat = ['@professor.getTurmas().get(0).getNome()', '@professor.getTurmas().get(1).getNome()'];
+			var media = [@professor.getTurmas().get(0).getMedia(), @professor.getTurmas().get(1).getMedia()];
+			var moda = [@professor.getTurmas().get(0).getModa(), @professor.getTurmas().get(1).getModa()];
+			var rend = [@professor.getTurmas().get(0).getRendimento()*100, @professor.getTurmas().get(1).getRendimento()*100];
+		</script>
+	} else if(professor.getTurmas().size() == 3){
+		<script type="text/javascript">
+			var cat = ['@professor.getTurmas().get(0).getNome()', '@professor.getTurmas().get(1).getNome()', '@professor.getTurmas().get(2).getNome()'];
+			var media = [@professor.getTurmas().get(0).getMedia(), @professor.getTurmas().get(1).getMedia(), @professor.getTurmas().get(2).getMedia()];
+			var moda = [@professor.getTurmas().get(0).getModa(), @professor.getTurmas().get(1).getModa(), @professor.getTurmas().get(2).getModa()];
+			var rend = [@professor.getTurmas().get(0).getRendimento()*100, @professor.getTurmas().get(1).getRendimento()*100, @professor.getTurmas().get(2).getRendimento()*100];
+		</script>
+	}
+
+
+	<script type="text/javascript">
+
+		Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Turmas'
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: cat,
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: ''
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.2f}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Média de Questões Acertadas',
+        data: media
+
+    }, {
+        name: 'Quantidade de Questões Frequentemente Acertadas',
+        data: moda
+
+    }, {
+        name: 'Rendimento da Tuma',
+        data: rend
+    }]
+    });
+
+	</script>
+
+
+	@if(professor.getTurmas().size() == 0){
+		<div id="msg1">
+			Você não tem turmas!
+			<a href="#">Clique Aqui para Criar uma Turma</a>
+		</div>
+	}
+
+	<ul id="msg3Box">
+	@for(turma <- professor.getTurmas()){
+		@if(turma.getAlunos().size() == 0){
+			<b id="msg2">Não tem alunos na turma: @turma.getNome()</b>
+		}
+
+		@if(turma.getQuestionarios().size() == 0){
+			
+				<li><p style="color:red">Não tem questionários na turma: @turma.getNome()</p></li>
+		}
+	}
+	</ul>
+</body>
+</html>

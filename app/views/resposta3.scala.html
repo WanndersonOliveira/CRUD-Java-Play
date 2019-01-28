@@ -1,0 +1,24 @@
+@(turmas: List[models.Turma])
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Resposta</title>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<td>Questionário</td>
+			<td>Turma</td>
+		</tr>
+			@for(turma <- turmas){
+				@for(quest <- turma.getQuestionarios()){
+					<tr>
+			    	<td>@quest.getNomeQuest()</td>
+			    	<td>@turma.getNome()</td>
+			    	</tr>
+				}
+			}
+	</table>
+</body>
+</html>

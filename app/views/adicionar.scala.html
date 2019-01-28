@@ -1,0 +1,22 @@
+@(user:Usuario)
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>@user.getNome()</title>
+</head>
+<body bgcolor="grey">
+	<h3>Car System</h3><br>
+	<a href="/prova"><b>Sair</b></a>
+	<br><br>
+	<b>Meus carrinhos</b><br>
+	<h4>Adicionar Carrinho</h4><br>
+	<br>
+	<form method="get" action="/prova/adicionar">
+		<input type="text" name="marca" placeholder="Marca"><br>
+		<input type="text" name="modelo" placeholder="Modelo"><br>
+		<input type="submit" value="Editar">
+	</form>
+
+</body>
+</html>

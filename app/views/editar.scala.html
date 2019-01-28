@@ -1,0 +1,20 @@
+@(user:Usuario)(marca : String)(modelo : String)
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>@user.getNome()</title>
+</head>
+<body bgcolor="grey">
+	<h3>Car System</h3><br>
+	<a href="/prova"><b>Sair</b></a>
+	<br><br>
+	<b>Meus carrinhos</b><br><br>
+	<form method="get" action="/prova/adicionar">
+		<input type="text" name="marca" value="@marca"><br>
+		<input type="text" name="modelo" value="@modelo"><br>
+		<input type="submit" value="Editar">
+	</form>
+
+</body>
+</html>

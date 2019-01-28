@@ -1,0 +1,83 @@
+@(turmas: List[models.Turma])
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Resposta</title>
+</head>
+<body>
+	<script type="text/javascript" src="@routes.Assets.versioned("javascripts/highcharts.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.versioned("javascripts/exporting.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.versioned("javascripts/export-data.js")"></script>
+	<table border="1">
+		<tr>
+			<td>Turma</td>
+			<td>Média</td>
+			<td>Rendimento</td>
+		</tr>
+			@for(turma <- turmas){
+					<tr>
+			    	<td>@turma.getNome()</td>
+			    	<td>@turma.getMedia()</td>
+			    	<td>@(turma.getRendimento()*100) %</td>
+			    	</tr>
+			}
+	</table>
+
+	<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+	<script type="text/javascript">
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Turmas'
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: [
+            '@turmas.get(0).getNome()',
+            '@turmas.get(1).getNome()'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: ''
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.2f}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Média',
+        data: [@turmas.get(0).getMedia(), @turmas.get(1).getMedia()]
+
+    }, {
+        name: 'Moda',
+        data: [@turmas.get(0).getModa(), @turmas.get(1).getModa()]
+
+    }, {
+        name: 'Rendimento',
+        data: [@turmas.get(0).getRendimento()*100, @turmas.get(1).getRendimento()*100]
+    }]
+    });
+		</script>
+</body>
+</html>
