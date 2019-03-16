@@ -8,3 +8,8 @@ Procedimento para executar a aplicação CRUD-Java-Play
   <li>Abra o Prompt de Comando;</li>
   <li>Digite <i>SET PATH=%PATH%;c:\program files\java\jdk_versaodoseujdk\bin</i></li>
 </ol>
+
+* <a href="https://github.com/WanndersonOliveira/CRUD-Java-Play">Baixe o CRUD-Java-Play</a>
+* Descompacte o projeto CRUD-Java-Play no diretório que você quiser
+* Através do Prompt de Comando, vá até a pasta desejada usando o comando: <i>c:\...\pastadesejada\CRUD-Java-Play</i>
+* Execute o comando: <i>sbt run</i>
